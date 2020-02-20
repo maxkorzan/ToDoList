@@ -7,6 +7,10 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../style.css">
 
+    <style>
+        * { border: 1px solid red !important; }
+    </style>
+
 </head>
 <body>
 <br>
@@ -21,31 +25,41 @@
 <br>
 <br>
 
-<div class="container" style="text-align: center">
+<div class="container">
+    <div class="row">
+    <hr class="mt-2 mb-5">
 
-    <div th:each="item : ${items}">
-            <h3 class="display-4" th:inline="text">[[${item.description}]]</h3>
-                <div th:if="${item.picture} !=null">
-                <img th:src="${item.picture}" style="height: 150px" />
+    <div class="row text-center text-lg-left">
+
+            <div th:each="item : ${items}" class="col-lg-3 col-md-4 col-6">
+
+                <div class="card" style="width: 18rem;">
+                    <div th:if="${item.picture} !=null">
+                        <img class="card-img-top" th:src="${item.picture}" style="height: 150px" alt="">
+                    </div>
+                    <div class="card-body">
+                        <h4 th:inline="text">[[${item.description}]]</h4>
+                        <p th:inline="text">Name: [[${item.name}]]</p>
+                        <p th:inline="text">Description: [[${item.description}]]</p>
+                        <p th:inline="text">Priority: [[${item.priority}]]</p>
+                        <p th:inline="text">Due Date: [[${item.dueDate}]]</p>
+                        <div th:if="${item.isCompleted} == Y">
+                            <p th:inline="text">Completed: <img src="Smiley.png" style="height: 30px" alt=""> </p>
+                        </div>
+                        <div th:if="${item.isCompleted} == N">
+                            <p th:inline="text">Completed: <img src="X.png" style="height: 30px" alt=""> </p>
+
+
+                        </div>
+
+                        <a th:href="@{/update/{id} (id=${item.id})}">Update</a>
+                        <a th:href="@{/delete/{id} (id=${item.id})}">Delete</a>
+                    </div>
                 </div>
-            <p th:inline="text">Name: [[${item.name}]]</p>
-            <p th:inline="text">Description: [[${item.description}]]</p>
-            <p th:inline="text">Priority: [[${item.priority}]]</p>
-            <p th:inline="text">Due Date: [[${item.dueDate}]]</p>
-            <div th:if="${item.isCompleted} == Y">
-                <p th:inline="text">Completed: <img src="Smiley.png" style="height: 30px" alt=""> </p>
             </div>
-            <div th:if="${item.isCompleted} == N">
-                <p th:inline="text">Completed: <img src="X.png" style="height: 30px" alt=""> </p>
-            </div>
-            <br>
-            <br>
-            <hr>
-            <br>
-            <br>
 
     </div>
-
+    </div>
 </div>
 
 
